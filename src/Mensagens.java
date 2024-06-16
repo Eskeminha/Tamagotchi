@@ -163,7 +163,7 @@ public class Mensagens {
         System.out.println(ascii.getAsciiLogo());
     }
     public void imprimeMorreu(){
-        imprimeLoreRapido(ascii.getAsciiMorreu());
+        imprimeLoreRapido("\n" + ascii.getAsciiMorreu() + "\n");
     }
     public void imprimeLogoEskeminha() {
         imprimeLoreRapido(ascii.getAsciiLogoEskeminha());
@@ -246,5 +246,4 @@ public class Mensagens {
         imprimeLore(texto);
         setVelocidadeTexto(velocidadeAtual);
     }
-
 }

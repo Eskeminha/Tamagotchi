@@ -39,19 +39,18 @@ public class Principal {
     static final String ANSI_ITALIC_RESET = "\033[0m";
     static Scanner scanner = new Scanner(System.in); // Usada apenas para o pressione Enter. Poderia ter usado o Teclado, mas quis variar um pouco.
 
-
-
-
     /*
         Método Main.
             Código principal.
 
      */
     public static void main(String[] args) {
-
+        
         // Variáveis do Main
         String nomeDoTreinador = "";
         Random aleatorio = new Random();
+
+
 
         /*
             O aplicativo possui diversos textos, razões pelas quais foi adicionada lógica de velocidade dos mesmos.
@@ -153,15 +152,19 @@ public class Principal {
 
         limpaTela();
 
+
         // Determinado o nome do Treinador,inicia-se a introdução do Tamagotchi.
         // Texto de introdução ao mundo do Tamagotchi.
         msg.imprimeLore("\nCerto! Então o seu nome é " + nomeDoTreinador + "!\n");
         msg.imprimeLoreRapido(msg.getTamagochiAscii(1));
-        msg.imprimeLore("Este é o seu Tamagotchi, será o seu companheiro de vida.");
-        msg.imprimeLore("Enquanto ele durar.\n...");
+        msg.imprimeLore("""
+                Este é o seu Tamagotchi, será o seu companheiro de vida.\
+
+                Enquanto ele durar.
+                ...""");
         pausaDramatica(2000);
-        msg.imprimeLore("Seu Tamagotchi irá dividir com você alegrias, tristezas e momentos inesquecíveis !!");
-        msg.imprimeLore("A menos que você se esqueça dele.\n...");
+        msg.imprimeLore("Seu Tamagotchi irá dividir com você alegrias, tristezas e momentos inesquecíveis !!" +
+                "\nA menos que você se esqueça dele.\n...");
         // Pausa Dramática (De acordo com Hollywood, deve durar de 3 a 5 segundos...)
         pausaDramatica(4000);
         //Continua...
@@ -170,87 +173,98 @@ public class Principal {
         msg.imprimeLore("...");
         pausaDramatica(2000);
         msg.imprimeLore("Bom, como é o nome deste seu grande amigo e companheiro?" +
-               ANSI_ITALIC + "\nDICA: Escolha um nome inesquecível, isso lhe ajudará a lembrar dele!" + ANSI_ITALIC_RESET);
+                ANSI_ITALIC + "\nDICA: Escolha um nome inesquecível, isso lhe ajudará a lembrar dele!" + ANSI_ITALIC_RESET);
 
         // Requisita o nome do Buddy.
         System.out.print("\nNome do seu Tamagotchi: ");
         String nomeInicial = Teclado.leString();
 
         // Se não for inserido nada, o app seta Tamagotchi como padrão.
-        if(nomeInicial.equals(""))
+        if (nomeInicial.equals(""))
             nomeInicial = "Tamagotchi";
+
+        if (nomeInicial.equalsIgnoreCase(nomeDoTreinador)) {
+            msg.imprimeLore("UAU ! Vocês são tão próximos que até possuem o mesmo nome ! Que incrível !");
+        }
 
         // Inicia o grande companheiro desta jornada!
         Tamagotchi buddy = new Tamagotchi(nomeInicial, nomeDoTreinador, 0, 1, msg);
 
-        msg.imprimeLore("Seu Tamagotchi se chama " + buddy.getNome() + " e está pronto para começar a sua jornada !");
+        msg.imprimeLore("Seu Tamagotchi se chama " + buddy.getNome() +
+                " e está pronto para começar a sua jornada !");
 
         // Inicia o loop do jogo
         while (true){
             limpaTela();
-            // Primeiro teste do loop. Se tiver 15 dias ou mais (impossível), morre.
-            if (buddy.getIdade() >= 15) {
-                buddy.imprimeDados();
-                System.out.println();
-                msg.imprimeMorreu();
-                System.out.println();
-                msg.imprimeLore("O seu melhor amigo " + buddy.getNome() + ", viveu uma vida longa, feliz e próspera, mas infelizmente, acaba de morrer.");
-                break;
-            } else if (buddy.getPeso() > 20) { // Se tiver mais de 20 kg, explode.
+            if (buddy.getPeso() > 20) { // Se tiver mais de 20 kg, explode.
                 msg.imprimeLoreRapido(msg.getNukeAscii());
                 msg.imprimeLore(msg.getMensagemAleatoria("explodiu"));
                 pausaDramatica(2000);
                 buddy.imprimeDados();
-                System.out.println();
                 msg.imprimeMorreu();
-                System.out.println();
                 break;
-            } else if (buddy.getPeso() <= 0) { // Se tiver 0 ou menos KG morre.
+            } else if (buddy.getPeso() <= 0) {
+                // Se tiver 0 ou menos KG morre.
                 buddy.imprimeDados();
-                System.out.println();
                 msg.imprimeMorreu();
-                System.out.println();
-                msg.imprimeLore("O seu melhor amigo " + buddy.getNome() + " acaba de morrer pois estava magro demais.");
+                msg.imprimeLore("O seu melhor amigo " + buddy.getNome() +
+                        " acaba de morrer pois estava magro demais.");
                 msg.imprimeLore(msg.getMensagemAleatoria("desnutricao"));
                 break;
-            } else if(buddy.isFome()) { // Verifica se tem fome (Lógica existente por causa da caminhada).
+            } else if (buddy.getIdade() >= 15) {
+                // Se tiver 15 dias ou mais (impossível), morre.
+                buddy.imprimeDados();
+                msg.imprimeMorreu();
+                msg.imprimeLore("O seu melhor amigo " + buddy.getNome() +
+                    ", viveu uma vida longa, feliz e próspera, mas infelizmente, acaba de morrer em razão da idade.");
+                break;
+            } else if(buddy.isFome()) {
+                // Verifica se tem fome (Lógica existente por causa da caminhada).
                 buddy.imprimeDados();
                 logicaFome(buddy);
                 buddy.isFome(false);
-            } else if(buddy.isMuitaFome()) { // Verifica se tem muita fome (Lógica existente por causa da corrida).
+            } else if(buddy.isMuitaFome()) {
+                // Verifica se tem muita fome (Lógica existente por causa da corrida).
                 buddy.imprimeDados();
                 buddy.comer(1);
                 buddy.isMuitaFome(false);
+            } else if (buddy.isSono()) {
+                // Verifica se está com sono. Vai dormir porque no exercício ele manda dormir, e não questionar ao player.
+                buddy.imprimeDados();
+                msg.imprimeLore(buddy.getNome() + " está com sono por comer demais e foi dormir. ZZZzzzzZZZZzz");
+                buddy.dormir();
+                buddy.resetaVezesAcordado();
+                buddy.isSono(false);
             } else {
                 // Joga a sorte pra ver qual a treta do dia
                 int valor = aleatorio.nextInt(3) + 1;
 
-                // adicionado para exibir dados sempre que ocorrer o loop.
+                // Adicionado para exibir dados sempre que ocorrer o loop.
                 buddy.imprimeDados();
                 pausaDramatica(1000);
 
-                // Verifica se o Tamagotchi está a mais de 5 dias sem dormir para determinar se o mesmo desmaia de sono ou não.
-                // Se chegar em 6 ou mais (impossível) dias, ele vai dormir automaticamente, resetar a contagem da sequência de dias acordado e passar o dia.
-                if (buddy.getVezesAcordado() > 5) {
-                    msg.imprimeLore(buddy.getNome() + " está exausto, pois deixou de dormir " + buddy.getVezesAcordado() + " vezes seguidas!");
-                    msg.imprimeLore("Desta forma, ele desmaiou e caiu no sono.");
-                    msg.imprimeLore(msg.getMensagemAleatoria("sono-ruim"));
-                    buddy.resetaVezesAcordado();
-                    buddy.aumentaIdade();
-                } else {
-                    // Determina o que vai acontecer de acordo com o valor aleatório e chama o método específico (enviando o objeto).
-                    // ( 1 - Sono, 2 - Fome, 3 - Entediado)
-                    switch (valor) {
-                        case 1:
+                // Determina o que vai acontecer de acordo com o valor aleatório e chama o método específico (enviando o objeto).
+                // ( 1 - Sono, 2 - Fome, 3 - Entediado)
+                switch (valor) {
+                    case 1:
+                        if(buddy.getVezesAcordado() == 5) {
+                            // Verifica se o Tamagotchi está a mais de 5 vezes sem dormir para determinar se o mesmo desmaia de sono ou não.
+                            // Se chegar em 6 ou mais (impossível) dias, ele vai dormir automaticamente, resetar a contagem da sequência de dias acordado e passar o dia.
+                            msg.imprimeLore(buddy.getNome() + " está exausto, pois deixou de dormir " + buddy.getVezesAcordado() + " vezes seguidas!");
+                            msg.imprimeLore("Desta forma, ele desmaiou e caiu no sono.");
+                            msg.imprimeLore(msg.getMensagemAleatoria("sono-ruim"));
+                            buddy.resetaVezesAcordado();
+                            buddy.aumentaIdade();
+                        } else {
                             logicaSono(buddy);
-                            break;
-                        case 2:
-                            logicaFome(buddy);
-                            break;
-                        case 3:
-                            logicaEntediado(buddy);
-                            break;
-                    }
+                        }
+                        break;
+                    case 2:
+                        logicaFome(buddy);
+                        break;
+                    case 3:
+                        logicaEntediado(buddy);
+                        break;
                 }
             }
         }
@@ -305,8 +319,8 @@ public class Principal {
                 -> Comer pouco (Normal, aumenta 1kg)
                 -> Não comer (perde 2kg)
         DETALHES:
-            -> Se ultrapassar 20kg, ele EXPLODE. Implementado antes do case.
-            -> Se chegar a 0kg, ele fica DESNUTRIDO e MORRE.. Implementado antes do case.
+                -> Se ultrapassar 20kg, ele EXPLODE. Implementado antes do case.
+                -> Se chegar a 0kg, ele fica DESNUTRIDO e MORRE.. Implementado antes do case.
     */
 
     private static void logicaFome(Tamagotchi buddy) {
@@ -336,7 +350,7 @@ public class Principal {
     private static void logicaSono(Tamagotchi buddy) {
         while (true) {
             msg.imprimeLore("\nMuito bem, parece que o " + buddy.getNome() + " está com sono !");
-            msg.imprimeLore("Você tem duas opções: \n1. Fazê-lo Dormir. \n2. Mantê-lo acordado.");
+            msg.imprimeLore("Você tem duas opções: \n1. Fazê-lo dormir. \n2. Mantê-lo acordado.");
             msg.imprimeLore("Qual é a sua decisão? ");
             int resposta = Teclado.leInt();
             if (resposta == 1) {

@@ -36,7 +36,7 @@ public class Tamagotchi {
     // Atributos principais da classe
     private String nome;
     private int idade, peso, vezesAcordado = 0;
-    private boolean isFome, isMuitaFome;
+    private boolean isFome, isMuitaFome, isSono;
 
     // Atributos do conteúdo extra
     private String nomeDoTreinador; // poderia ser feita uma classe treinador mais tarde para haver possibilidade de mais de um treinador, assim como vincular multiplos Tamagotchis aos mesmos.
@@ -87,6 +87,12 @@ public class Tamagotchi {
     public void isMuitaFome(boolean isMuitaFome) {
         this.isMuitaFome = isMuitaFome;
     }
+    public boolean isSono() {
+        return this.isSono;
+    }
+    public void isSono(boolean isSono) {
+        this.isSono = isSono;
+    }
     public String getNomeDoTreinador() {
         return this.nomeDoTreinador;
     }
@@ -111,9 +117,8 @@ public class Tamagotchi {
             setPeso(5, true);
             msg.imprimeLore(getNome() + " comeu MUITO !");
             msg.imprimeLore(msg.getMensagemAleatoria("comida-grande"));
-            msg.imprimeLore(getNome() + " ganhou 5 kg e agora precisa dormir. ZZZzzzzZZZZzz");
-            resetaVezesAcordado();
-            dormir();
+            msg.imprimeLore(getNome() + " ganhou 5 kg e está sentindo sono...");
+            isSono = true;
         } else if (x == 2) {
             setPeso(1, true);
             msg.imprimeLore(getNome() + " se alimentou normalmente e ganhou 1kg.");
@@ -134,6 +139,7 @@ public class Tamagotchi {
         System.out.println(getNome() + " dormiu.");
         msg.imprimeLore(msg.getMensagemAleatoria("sono-bom"));
         aumentaIdade();
+        resetaVezesAcordado(); // Só por garantia, mas não seria necessário.
     }
 
     // O método vai ser chamado pelos métodos do Principal.
@@ -152,7 +158,7 @@ public class Tamagotchi {
         } else { // Correr
             msg.imprimeLore(getNome() + " correu por 10 minutos e emagreceu 4kg !");
             msg.imprimeLore(msg.getMensagemAleatoria("corrida"));
-            msg.imprimeLore(getNome() + " estava faminto em razão do exercício !");
+            msg.imprimeLore(getNome() + " esta faminto em razão do exercício !");
             setPeso(4, false);
             isMuitaFome(true);
         }
