@@ -15,13 +15,13 @@ The Tamagotchi has the following characteristics and actions available:
 - Trainer's Name
 
 ## Actions:
-Feel sleepy: The Tamagotchi can feel sleepy, and the user can choose between letting it sleep or keeping it awake. If it stays awake 5 times in a row, it will automatically fall asleep. When it sleeps, its age increases by 1 day. It dies when it reaches 15 days old.
+1. Feel sleepy: The Tamagotchi can feel sleepy, and the user can choose between letting it sleep or keeping it awake. If it stays awake 5 times in a row, it will automatically fall asleep. When it sleeps, its age increases by 1 day. It dies when it reaches 15 days old.
 
-Feel hungry: The Tamagotchi can feel hungry, and the user can choose between eating a lot, eating a little, or not eating. Eating a little is the default, increasing its weight by 1 kilogram each time. Eating a lot increases 5 kilograms and makes it fall asleep. Not eating makes it lose 2 kilograms each time. If it exceeds 20 kilograms, it explodes; if it reaches zero kilograms, it dies from malnutrition.
+2. Feel hungry: The Tamagotchi can feel hungry, and the user can choose between eating a lot, eating a little, or not eating. Eating a little is the default, increasing its weight by 1 kilogram each time. Eating a lot increases 5 kilograms and makes it fall asleep. Not eating makes it lose 2 kilograms each time. If it exceeds 20 kilograms, it explodes; if it reaches zero kilograms, it dies from malnutrition.
 
-Get bored: The Tamagotchi can get bored, and the user can choose between running for 10 minutes or walking for 10 minutes. Running reduces weight by 4 kilograms and makes it eat a lot. Walking reduces weight by 1 kilogram and leaves it hungry.
+3. Get bored: The Tamagotchi can get bored, and the user can choose between running for 10 minutes or walking for 10 minutes. Running reduces weight by 4 kilograms and makes it eat a lot. Walking reduces weight by 1 kilogram and leaves it hungry.
 
-Wishes selection:
+## Wishes selection:
 The Tamagotchi's wishes occur randomly, using the Math.random() method to select from desired values.
 
 ## How it works:
