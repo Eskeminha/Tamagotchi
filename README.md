@@ -4,7 +4,7 @@
 
 This is an application created to simulate the life of a digital Tamagotchi, according to the functionalities required in the Algorithms and Programming Task: Fundamentals, by Prof. Dr. Mateus Raeder. This is the version of the game that I created, based on the mentioned characteristics and actions required for the task.
 
-##Features
+## Features
 The Tamagotchi has the following characteristics and actions available:
 
 ### Characteristics:
