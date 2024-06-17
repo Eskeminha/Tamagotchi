@@ -7,12 +7,12 @@ This is an application created to simulate the life of a digital Tamagotchi, acc
 ##Features
 The Tamagotchi has the following characteristics and actions available:
 
-## Characteristics:
+### Characteristics:
 
-Name
-Age
-Weight
-Trainer's Name
+- Name
+- Age
+- Weight
+- Trainer's Name
 
 ## Actions:
 Feel sleepy: The Tamagotchi can feel sleepy, and the user can choose between letting it sleep or keeping it awake. If it stays awake 5 times in a row, it will automatically fall asleep. When it sleeps, its age increases by 1 day. It dies when it reaches 15 days old.
