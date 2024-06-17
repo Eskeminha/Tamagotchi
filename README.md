@@ -1,6 +1,6 @@
 # Tamagotchi
 
-<img src="[https://github.com/username/repository/raw/main/images/example.png](https://github.com/Eskeminha/Tamagotchi/blob/bd4ddab27e3338f705c98507d88cdb356b1c966a/TamagotchiLogo.jpg)" alt="Tamagotchi Logo" width="300">
+<img src="https://github.com/Eskeminha/Tamagotchi/blob/bd4ddab27e3338f705c98507d88cdb356b1c966a/TamagotchiLogo.jpg" alt="Tamagotchi Logo" width="300">
 
 
 
