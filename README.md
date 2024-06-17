@@ -1,5 +1,7 @@
 # Tamagotchi
 
+![Tamagotchi Logo]([https://github.com/username/repository/raw/main/images/example.png](https://github.com/Eskeminha/Tamagotchi/blob/master/TamagotchiLogo.jpg))
+
 Este é um aplicativo criado para simular a vida de um Tamagotchi digital, conforme as funcionalidades exigidas na Tarefa de Algoritmos e Programação: Fundamentos, do Prof. Dr. Mateus Raeder. Esta é a versão do jogo que eu fiz, com base nas referidas características e ações necessárias para a tarefa.
 
 ## Funcionalidades
